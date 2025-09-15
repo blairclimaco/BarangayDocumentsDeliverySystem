@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Menu - Barangay Clearance Delivery System</title>
+    <link rel="stylesheet" href="styles.css?v=4">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="menu-body">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <button class="sidebar-handle" aria-label="Expand sidebar">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-building"></i>
+                <span>Barangay System</span>
+            </div>
+        </div>
+        
+        <div class="sidebar-content">
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <img id="userProfileImage" src="" alt="Profile Picture" style="display: none;">
+                    <i class="fas fa-user" id="userDefaultIcon"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name" id="userName">John Doe</span>
+                    <span class="user-role">Resident</span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="#" class="nav-link" onclick="showSection('dashboard')">
+                        <i class="fas fa-home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('documents')">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Request Document</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('tracking')">
+                        <i class="fas fa-search"></i>
+                        <span>Track Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('history')">
+                        <i class="fas fa-history"></i>
+                        <span>Order History</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('profile')">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Edit Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="sidebar-footer">
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notificationCount">3</span>
+            </button>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="notification-dropdown" id="notificationDropdown">
+        <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-all-read" id="markAllRead">Mark all as read</button>
+        </div>
+        <div class="notification-list" id="notificationList"></div>
+    </div>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="sidebar-toggle" onclick="toggleSidebar()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1>Welcome back, <span id="welcomeName">User</span>!</h1>
+                    <p>Manage your barangay documents and track your orders easily</p>
+                </div>
+                <div class="welcome-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-file-alt"></i>
+                        <div>
+                            <span class="stat-number" id="totalOrders">5</span>
+                            <span class="stat-label">Total Orders</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <span class="stat-number" id="pendingOrders">2</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-truck"></i>
+                        <div>
+                            <span class="stat-number" id="deliveryOrders">1</span>
+                            <span class="stat-label">In Delivery</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <button class="action-card" onclick="openDocumentRequest()">
+                        <div class="action-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Request Document</h3>
+                        <p>Submit a new document request</p>
+                    </button>
+                    
+                    <button class="action-card" onclick="openOrderTracking()">
+                        <div class="action-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Track Order</h3>
+                        <p>Check status of your orders</p>
+                    </button>
+                    
+                    <button class="action-card" onclick="openOrderHistory()">
+                        <div class="action-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>Order History</h3>
+                        <p>View all your past orders</p>
+                    </button>
+                    
+                    <button class="action-card" onclick="openProfile()">
+                        <div class="action-icon">
+                            <i class="fas fa-user-edit"></i>
+                        </div>
+                        <h3>Edit Profile</h3>
+                        <p>Update your personal information</p>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Document Types -->
+            <section class="document-types">
+                <h2>Available Documents</h2>
+                <div class="documents-grid">
+                    <div class="document-card" data-type="barangay-clearance">
+                        <div class="document-icon">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <h3>Barangay Clearance</h3>
+                        <p>Required for various transactions and applications</p>
+                        <div class="document-info">
+                            <span class="processing-time"><i class="fas fa-clock"></i> 1-2 days</span>
+                            <span class="document-fee">Free</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="requestDocument('barangay-clearance')">Request Now</button>
+                    </div>
+                    
+                    <div class="document-card" data-type="certificate-residency">
+                        <div class="document-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Certificate of Residency</h3>
+                        <p>Proof of residence in the barangay</p>
+                        <div class="document-info">
+                            <span class="processing-time"><i class="fas fa-clock"></i> 1-2 days</span>
+                            <span class="document-fee">Free</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="requestDocument('certificate-residency')">Request Now</button>
+                    </div>
+                    
+                    <div class="document-card" data-type="certificate-indigency">
+                        <div class="document-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Certificate of Indigency</h3>
+                        <p>For availing government assistance programs</p>
+                        <div class="document-info">
+                            <span class="processing-time"><i class="fas fa-clock"></i> 2-3 days</span>
+                            <span class="document-fee">Free</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="requestDocument('certificate-indigency')">Request Now</button>
+                    </div>
+                    
+                    <div class="document-card" data-type="business-permit">
+                        <div class="document-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Business Permit</h3>
+                        <p>Required for operating a business in the barangay</p>
+                        <div class="document-info">
+                            <span class="processing-time"><i class="fas fa-clock"></i> 3-5 days</span>
+                            <span class="document-fee">₱500</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="requestDocument('business-permit')">Request Now</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Orders -->
+            <section class="recent-orders">
+                <div class="section-header">
+                    <h2>Recent Orders</h2>
+                    <a href="order-history.html" class="view-all">View All</a>
+                </div>
+                <div class="orders-list" id="recentOrdersList">
+                    <!-- Recent orders will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Document Request Modal -->
+    <div class="modal" id="documentRequestModal">
+        <div class="modal-content request-modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-file-plus"></i>
+                    <h2 id="modalTitle">Request Document</h2>
+                </div>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="request-form-container">
+                    <form id="documentRequestForm" class="request-form">
+                        <div class="form-section">
+                            <h3><i class="fas fa-file-alt"></i> Document Information</h3>
+                            <div class="form-group">
+                                <label for="documentType">Document Type</label>
+                                <div class="select-wrapper">
+                                    <select id="documentType" name="documentType" required>
+                                        <option value="">Select document type</option>
+                                        <option value="barangay-clearance">Barangay Clearance</option>
+                                        <option value="certificate-residency">Certificate of Residency</option>
+                                        <option value="certificate-indigency">Certificate of Indigency</option>
+                                        <option value="business-permit">Business Permit</option>
+                                    </select>
+                                    <i class="fas fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="purpose">Purpose of Request</label>
+                                <div class="textarea-wrapper">
+                                    <textarea id="purpose" name="purpose" placeholder="Please specify the purpose of this document (e.g., employment, business registration, etc.)" required></textarea>
+                                    <i class="fas fa-edit"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-truck"></i> Delivery Information</h3>
+                            <div class="form-group">
+                                <label for="deliveryMethod">Delivery Method</label>
+                                <div class="delivery-options">
+                                    <label class="delivery-option">
+                                        <input type="radio" name="deliveryMethod" value="pickup" required>
+                                        <div class="option-card">
+                                            <i class="fas fa-building"></i>
+                                            <div class="option-content">
+                                                <h4>Pick up at Barangay Hall</h4>
+                                                <p>Free • Available during office hours</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label class="delivery-option">
+                                        <input type="radio" name="deliveryMethod" value="delivery" required>
+                                        <div class="option-card">
+                                            <i class="fas fa-home"></i>
+                                            <div class="option-content">
+                                                <h4>Home Delivery</h4>
+                                                <p>₱50 • Delivered to your address</p>
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="deliveryAddress">Delivery Address</label>
+                                <div class="textarea-wrapper">
+                                    <textarea id="deliveryAddress" name="deliveryAddress" placeholder="Enter complete delivery address including barangay, city, and postal code" required></textarea>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3><i class="fas fa-user"></i> Contact Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contactNumber">Contact Number</label>
+                                    <div class="input-wrapper">
+                                        <input type="tel" id="contactNumber" name="contactNumber" placeholder="+63 912 345 6789" required>
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="preferredDate">Preferred Delivery Date</label>
+                                    <div class="input-wrapper">
+                                        <input type="date" id="preferredDate" name="preferredDate" required>
+                                        <i class="fas fa-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" id="cancelRequest">
+                                <i class="fas fa-times"></i>
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                                Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Tracking Modal -->
+    <div class="modal" id="orderTrackingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Track Your Order</h2>
+                <button class="modal-close" id="trackingModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="tracking-search">
+                    <input type="text" id="orderTrackingNumber" placeholder="Enter order number">
+                    <button class="btn btn-primary" onclick="trackOrder()">Track Order</button>
+                </div>
+                <div class="tracking-result" id="trackingResult">
+                    <!-- Tracking result will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

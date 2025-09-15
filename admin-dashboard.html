@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Barangay Clearance Delivery System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-container">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Admin Dashboard</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="admin-info">
+                    <div class="admin-avatar">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="admin-details">
+                        <span class="admin-name">Administrator</span>
+                        <span class="admin-role">System Admin</span>
+                    </div>
+                </div>
+                <button class="btn btn-secondary" onclick="handleAdminLogout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="admin-container">
+            <!-- Stats Overview -->
+            <section class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pendingOrders">0</h3>
+                            <p>Pending Orders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon processing">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalOrders">0</h3>
+                            <p>Total Orders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon users">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalUsers">0</h3>
+                            <p>Total Users</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon completed">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="completedOrders">0</h3>
+                            <p>Completed Orders</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Navigation Tabs -->
+            <section class="admin-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="showTab('orders')">
+                        <i class="fas fa-list"></i>
+                        All Orders
+                    </button>
+                    <button class="tab-btn" onclick="showTab('users')">
+                        <i class="fas fa-users"></i>
+                        User Management
+                    </button>
+                    <button class="tab-btn" onclick="showTab('settings')">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </button>
+                </div>
+            </section>
+
+            <!-- Orders Tab -->
+            <section id="ordersTab" class="tab-content active">
+                <div class="section-header">
+                    <h2>Order Management</h2>
+                    <div class="filter-controls">
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="ready">Ready</option>
+                            <option value="in-delivery">In Delivery</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                        <input type="text" id="searchOrders" class="search-input" placeholder="Search orders...">
+                    </div>
+                </div>
+                
+                <div class="orders-table-container">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>User</th>
+                                <th>Document Type</th>
+                                <th>Status</th>
+                                <th>Price</th>
+                                <th>Assigned Person</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Orders will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Users Tab -->
+            <section id="usersTab" class="tab-content">
+                <div class="section-header">
+                    <h2>User Management</h2>
+                    <div class="filter-controls">
+                        <input type="text" id="searchUsers" class="search-input" placeholder="Search users...">
+                    </div>
+                </div>
+                
+                <div class="users-table-container">
+                    <table class="users-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Registration Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section id="settingsTab" class="tab-content">
+                <div class="section-header">
+                    <h2>System Settings</h2>
+                </div>
+                
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <h3>Document Pricing</h3>
+                        <div class="setting-content">
+                            <div class="price-setting">
+                                <label>Barangay Clearance</label>
+                                <input type="number" id="priceBarangayClearance" value="50" min="0">
+                                <span>PHP</span>
+                            </div>
+                            <div class="price-setting">
+                                <label>Certificate of Indigency</label>
+                                <input type="number" id="priceCertificateIndigency" value="30" min="0">
+                                <span>PHP</span>
+                            </div>
+                            <div class="price-setting">
+                                <label>Certificate of Residency</label>
+                                <input type="number" id="priceCertificateResidency" value="40" min="0">
+                                <span>PHP</span>
+                            </div>
+                            <button class="btn btn-primary" onclick="updatePricing()">
+                                <i class="fas fa-save"></i>
+                                Update Pricing
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-card">
+                        <h3>Delivery Personnel</h3>
+                        <div class="setting-content">
+                            <div class="personnel-management">
+                                <div class="add-personnel-form">
+                                    <h4>Add New Personnel</h4>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label>Full Name</label>
+                                            <input type="text" id="newPersonnelName" class="form-control" placeholder="Enter full name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="tel" id="newPersonnelPhone" class="form-control" placeholder="Enter phone number">
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary" onclick="addNewPersonnel()">
+                                        <i class="fas fa-plus"></i>
+                                        Add Personnel
+                                    </button>
+                                </div>
+                                
+                                <div class="personnel-list" id="personnelList">
+                                    <!-- Personnel will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderDetailsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Order Details</h2>
+                <button class="modal-close" id="orderDetailsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-details" id="orderDetailsContent">
+                    <!-- Order details will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Actions Modal -->
+    <div class="modal" id="orderActionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Order Actions</h2>
+                <button class="modal-close" id="orderActionsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-actions" id="orderActionsContent">
+                    <!-- Order actions will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Actions Modal -->
+    <div class="modal" id="userActionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>User Actions</h2>
+                <button class="modal-close" id="userActionsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="user-actions" id="userActionsContent">
+                    <!-- User actions will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div class="message-overlay" id="messageOverlay" style="display: none;">
+        <div class="message-box">
+            <div class="message-icon">
+                <i class="fas fa-check-circle" id="messageIcon"></i>
+            </div>
+            <div class="message-content">
+                <h3 id="messageTitle">Success!</h3>
+                <p id="messageText">Action completed successfully!</p>
+            </div>
+            <button class="message-close" id="messageClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

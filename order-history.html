@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Barangay Clearance Delivery System</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="history-body">
+    <!-- Header -->
+    <header class="history-header">
+        <div class="header-container">
+            <div class="header-left">
+                <button class="back-btn" onclick="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Menu
+                </button>
+                <h1>Order History</h1>
+            </div>
+            <div class="header-right">
+                <div class="filter-controls">
+                    <select id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="ready">Ready for Pickup</option>
+                        <option value="in-delivery">In Delivery</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <select id="dateFilter">
+                        <option value="all">All Time</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="history-main">
+        <div class="history-container">
+            <!-- Summary Cards -->
+            <section class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Total Orders</h3>
+                        <span class="summary-number" id="totalOrders">12</span>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Pending</h3>
+                        <span class="summary-number" id="pendingOrders">3</span>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>Completed</h3>
+                        <span class="summary-number" id="completedOrders">8</span>
+                    </div>
+                </div>
+                
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="summary-content">
+                        <h3>In Delivery</h3>
+                        <span class="summary-number" id="deliveryOrders">1</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Orders List -->
+            <section class="orders-section">
+                <div class="orders-header">
+                    <h2>All Your Orders</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchOrders" placeholder="Search orders...">
+                    </div>
+                </div>
+                
+                <div class="orders-list" id="ordersList">
+                    <!-- Orders will be populated by JavaScript -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderDetailsModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>Order Details</h2>
+                <button class="modal-close" id="orderDetailsClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="order-details" id="orderDetailsContent">
+                    <!-- Order details will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
