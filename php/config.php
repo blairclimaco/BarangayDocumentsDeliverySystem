@@ -8,8 +8,10 @@
 // Data directory for JSON file storage
 define('DATA_DIR', __DIR__ . '/data/');
 
-// Admin token for viewing submissions (change this in production)
-define('ADMIN_TOKEN', 'admin_secret_token_change_me');
+// Admin token for viewing submissions
+// SECURITY: Set this via environment variable ADMIN_TOKEN or change the default before production
+$adminToken = getenv('ADMIN_TOKEN');
+define('ADMIN_TOKEN', $adminToken !== false ? $adminToken : 'admin_secret_token_change_me');
 
 // Site settings
 define('SITE_NAME', 'Barangay Documents Delivery System');
@@ -21,6 +23,14 @@ define('JS_PATH', 'assets/js/');
 
 // Enable/disable debug mode
 define('DEBUG_MODE', false);
+
+// Validation constants
+define('NAME_MIN_LENGTH', 2);
+define('NAME_MAX_LENGTH', 100);
+define('MESSAGE_MIN_LENGTH', 10);
+define('MESSAGE_MAX_LENGTH', 2000);
+define('PHONE_PATTERN', '/^[\+]?[0-9\s\-\(\)]{10,}$/');
+define('ASSET_VERSION', '7');
 
 // Ensure data directory exists
 if (!is_dir(DATA_DIR)) {

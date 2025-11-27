@@ -50,13 +50,13 @@ if (!filter_var($contact['email'], FILTER_VALIDATE_EMAIL)) {
 }
 
 // Validate name length
-if (strlen($contact['name']) < 2 || strlen($contact['name']) > 100) {
+if (strlen($contact['name']) < NAME_MIN_LENGTH || strlen($contact['name']) > NAME_MAX_LENGTH) {
     header('Location: ../index.php?error=invalid_name_length#contact');
     exit;
 }
 
 // Validate message length
-if (strlen($contact['message']) < 10 || strlen($contact['message']) > 2000) {
+if (strlen($contact['message']) < MESSAGE_MIN_LENGTH || strlen($contact['message']) > MESSAGE_MAX_LENGTH) {
     header('Location: ../index.php?error=invalid_message_length#contact');
     exit;
 }

@@ -91,16 +91,23 @@ Edit `config.php` to customize settings:
 // Data directory path
 define('DATA_DIR', __DIR__ . '/data/');
 
-// Admin token for viewing submissions (CHANGE THIS!)
-define('ADMIN_TOKEN', 'admin_secret_token_change_me');
-
 // Site settings
 define('SITE_NAME', 'Barangay Documents Delivery System');
 ```
 
 ### Security Note
 
-**Important:** Change the `ADMIN_TOKEN` value in `config.php` before deploying to production. The default token is for development purposes only.
+**Important:** The admin token must be configured before deploying to production. You have two options:
+
+1. **Environment Variable (Recommended):** Set the `ADMIN_TOKEN` environment variable:
+   ```bash
+   export ADMIN_TOKEN="your_secure_random_token"
+   php -S localhost:8000
+   ```
+
+2. **Edit config.php:** Change the default token value in `config.php` (not recommended for shared/version-controlled deployments)
+
+The default token is for development purposes only and should never be used in production.
 
 ## Data Storage
 

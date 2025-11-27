@@ -61,8 +61,7 @@ if (!in_array($submission['deliveryMethod'], $validDeliveryMethods)) {
 }
 
 // Validate phone number format (basic validation)
-$phonePattern = '/^[\+]?[0-9\s\-\(\)]{10,}$/';
-if (!preg_match($phonePattern, $submission['contactNumber'])) {
+if (!preg_match(PHONE_PATTERN, $submission['contactNumber'])) {
     header('Location: ../menu.php?error=invalid_phone_number');
     exit;
 }
