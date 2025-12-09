@@ -63,18 +63,43 @@ php/
 
 ### Option 2: Apache Web Server
 
-1. Copy the `php/` directory to your Apache document root (e.g., `/var/www/html/` or `htdocs/`)
+**Important:** The PHP application must be set as the document root or accessed as a subdirectory with the correct path.
 
-2. Ensure Apache has the PHP module enabled:
+#### Option 2A: Set php/ as Document Root (Recommended)
+
+1. **Copy ONLY the contents** of the `php/` directory to your Apache document root:
    ```bash
-   sudo a2enmod php
-   sudo systemctl restart apache2
+   # Linux/Mac
+   cp -r php/* /var/www/html/
+   
+   # Windows (using Command Prompt in the repository root)
+   xcopy /E /I php\* C:\xampp\htdocs\
    ```
 
-3. Access the site via your configured Apache virtual host or:
+2. Ensure Apache has the PHP module enabled (skip on Windows XAMPP/WAMP)
+
+3. Access the site at:
+   ```
+   http://localhost/
+   ```
+
+#### Option 2B: Access as Subdirectory
+
+1. Copy the entire `php/` directory (keeping the folder name) to your Apache document root:
+   ```bash
+   # Linux/Mac
+   cp -r php /var/www/html/
+   
+   # Windows XAMPP
+   xcopy /E /I php C:\xampp\htdocs\php
+   ```
+
+2. Access the site at:
    ```
    http://localhost/php/
    ```
+
+**Note:** If you get "Not Found" errors, make sure you're accessing the site with the correct URL as shown above. The `.htaccess` file will help ensure proper routing.
 
 ### Option 3: Nginx + PHP-FPM
 
@@ -166,6 +191,31 @@ The JavaScript functionality from the original site is preserved:
 - Dashboard statistics
 
 ## Troubleshooting
+
+### "Not Found" or 404 Errors
+
+If you get "Not Found" errors when clicking links:
+
+1. **Verify your access URL**: Make sure you're accessing the site correctly:
+   - If you copied contents to document root: `http://localhost/`
+   - If you kept the php/ folder: `http://localhost/php/`
+
+2. **Check file location**: Ensure all PHP files are in the correct directory:
+   ```bash
+   # Should see index.php, login.php, menu.php, profile.php, etc.
+   ls -la /path/to/your/webroot/
+   ```
+
+3. **Apache configuration**: Ensure mod_rewrite is enabled (if using .htaccess):
+   ```bash
+   # Linux
+   sudo a2enmod rewrite
+   sudo systemctl restart apache2
+   ```
+
+4. **Windows XAMPP/WAMP**: Make sure you copied the files to the correct htdocs directory:
+   - XAMPP: `C:\xampp\htdocs\`
+   - WAMP: `C:\wamp64\www\`
 
 ### Permission Denied Error
 
