@@ -1634,14 +1634,15 @@ input:checked + .toggle-slider:before {
     flex: 1;
 }
 
-.user-name {
+.sidebar .user-name {
     display: block;
     font-weight: 600;
     font-size: 0.8rem;
     line-height: 1.1;
+    color: #f5f6f7;
 }
 
-.user-role {
+.sidebar .user-role {
     display: block;
     font-size: 0.7rem;
     color: #e8ebed;
@@ -2294,12 +2295,12 @@ input:checked + .toggle-slider:before {
 
 .user-name {
     font-weight: 600;
-    color: #f5f6f7;
+    color: #333;
     font-size: 0.9rem;
 }
 
 .user-role {
-    color: #e8ebed;
+    color: #666;
     font-size: 0.8rem;
 }
 
