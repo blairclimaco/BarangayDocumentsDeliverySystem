@@ -39,7 +39,7 @@ include 'includes/header.php';
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary btn-full">
                     <i class="fas fa-sign-in-alt"></i>
                     Login as Admin
                 </button>

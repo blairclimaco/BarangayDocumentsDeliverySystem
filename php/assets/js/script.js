@@ -2929,10 +2929,36 @@ function loadPersonnelList() {
 
 function removePersonnel(personnelId) {
     if (confirm('Are you sure you want to remove this personnel?')) {
+        // Remove personnel from the list
         personnel = personnel.filter(p => p.id !== personnelId);
         localStorage.setItem('personnel', JSON.stringify(personnel));
+        
+        // Update all orders that had this personnel assigned
+        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        let ordersUpdated = false;
+        
+        orders.forEach(order => {
+            if (order.assignedPersonId === personnelId) {
+                order.assignedPerson = 'TBD';
+                order.assignedPersonId = null;
+                order.assignedPhone = null;
+                ordersUpdated = true;
+            }
+        });
+        
+        // Save updated orders if any were modified
+        if (ordersUpdated) {
+            localStorage.setItem('orders', JSON.stringify(orders));
+        }
+        
         loadPersonnelList();
-        showMessage('success', 'Success!', 'Personnel removed successfully!');
+        
+        // Reload orders table if it exists (we're on admin dashboard)
+        if (typeof loadOrders === 'function') {
+            loadOrders();
+        }
+        
+        showMessage('success', 'Success!', 'Personnel removed successfully! Orders reassigned to TBD.');
     }
 }
 
