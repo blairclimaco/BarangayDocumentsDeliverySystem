@@ -69,6 +69,7 @@ include 'includes/header.php';
         <div class="sidebar-footer">
             <button class="notification-btn" id="notificationBtn">
                 <i class="fas fa-bell"></i>
+                <span>Notifications</span>
                 <span class="notification-badge" id="notificationCount">3</span>
             </button>
             <button class="logout-btn" id="logoutBtn">

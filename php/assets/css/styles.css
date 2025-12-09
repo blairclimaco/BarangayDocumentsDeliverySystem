@@ -1644,7 +1644,7 @@ input:checked + .toggle-slider:before {
 .user-role {
     display: block;
     font-size: 0.7rem;
-    color: #bdc3c7;
+    color: #e8ebed;
     line-height: 1.1;
 }
 
@@ -1670,7 +1670,7 @@ input:checked + .toggle-slider:before {
     align-items: center;
     gap: 0.75rem;
     padding: 0.875rem 1rem;
-    color: #ecf0f1;
+    color: #f5f6f7;
     text-decoration: none;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
@@ -1718,7 +1718,7 @@ input:checked + .toggle-slider:before {
     padding: 0.5rem 0.75rem; /* smaller, rectangular hover area */
     background: transparent; /* no oval background */
     border: none;
-    color: #ecf0f1;
+    color: #f5f6f7;
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.3s ease;
@@ -1761,6 +1761,7 @@ input:checked + .toggle-slider:before {
     font-weight: 600;
     min-width: 20px;
     text-align: center;
+    margin-left: auto;
 }
 
 /* Header Styles */
