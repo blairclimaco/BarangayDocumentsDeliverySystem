@@ -28,32 +28,32 @@ function initializeApp() {
     console.log('Initializing app for page:', currentPage);
     
     switch(currentPage) {
-        case 'index.html':
+        case 'index.php':
         case '':
             initLandingPage();
             break;
-        case 'login.html':
+        case 'login.php':
             initLoginPage();
             break;
-        case 'register.html':
+        case 'register.php':
             initRegisterPage();
             break;
-        case 'dashboard.html':
+        case 'dashboard.php':
             initDashboardPage();
             break;
-        case 'menu.html':
+        case 'menu.php':
             initMenuPage();
             break;
-        case 'order-history.html':
+        case 'order-history.php':
             initOrderHistoryPage();
             break;
-        case 'profile.html':
+        case 'profile.php':
             initProfilePage();
             break;
-        case 'admin-login.html':
+        case 'admin-login.php':
             initAdminLoginPage();
             break;
-        case 'admin-dashboard.html':
+        case 'admin-dashboard.php':
             initAdminDashboardPage();
             break;
         default:
@@ -257,18 +257,18 @@ function handleLogin(e) {
             showMessage('success', 'Login Successful!', 'Welcome back! Redirecting to menu...');
             
             // Debug: Log the redirect attempt
-            console.log('Login successful, redirecting to menu.html');
+            console.log('Login successful, redirecting to menu.php');
             
             setTimeout(() => {
-                console.log('Executing redirect to menu.html');
-                window.location.href = 'menu.html';
+                console.log('Executing redirect to menu.php');
+                window.location.href = 'menu.php';
             }, 2000);
             
             // Fallback redirect in case setTimeout fails
             setTimeout(() => {
-                if (window.location.pathname.includes('login.html')) {
+                if (window.location.pathname.includes('login.php')) {
                     console.log('Fallback redirect triggered');
-                    window.location.href = 'menu.html';
+                    window.location.href = 'menu.php';
                 }
             }, 3000);
         } else {
@@ -343,7 +343,7 @@ function handleRegister(e) {
         
         // Redirect to login after 3 seconds
         setTimeout(() => {
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
         }, 3000);
     }, 2000);
 }
@@ -428,7 +428,7 @@ function initDashboardPage() {
     
     if (!loggedIn || !user.id) {
         console.log('Not authenticated, redirecting to login');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -440,7 +440,7 @@ function initDashboardPage() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('currentUser');
         alert(`Your account has been ${latestUser.status}. Please contact administrator.`);
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -781,7 +781,7 @@ function handleLogout() {
     isLoggedIn = false;
     
     // Redirect to login page
-    window.location.href = 'login.html';
+    window.location.href = 'login.php';
 }
 
 function toggleSidebar() {
@@ -985,10 +985,10 @@ function showSection(sectionName) {
             openOrderTracking();
             break;
         case 'history':
-            window.location.href = 'order-history.html';
+            window.location.href = 'order-history.php';
             break;
         case 'profile':
-            window.location.href = 'profile.html';
+            window.location.href = 'profile.php';
             break;
         case 'dashboard':
         default:
@@ -1027,7 +1027,7 @@ function initMenuPage() {
     
     if (!loggedIn || !user.id) {
         console.log('Not authenticated, redirecting to login');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -1039,7 +1039,7 @@ function initMenuPage() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('currentUser');
         alert(`Your account has been ${latestUser.status}. Please contact administrator.`);
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -1254,7 +1254,7 @@ function initOrderHistoryPage() {
     
     if (!loggedIn || !user.id) {
         console.log('Not authenticated, redirecting to login');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -1266,7 +1266,7 @@ function initOrderHistoryPage() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('currentUser');
         alert(`Your account has been ${latestUser.status}. Please contact administrator.`);
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -1421,7 +1421,7 @@ function initProfilePage() {
     
     if (!loggedIn || !user.id) {
         console.log('Not authenticated, redirecting to login');
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -1433,7 +1433,7 @@ function initProfilePage() {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('currentUser');
         alert(`Your account has been ${latestUser.status}. Please contact administrator.`);
-        window.location.href = 'login.html';
+        window.location.href = 'login.php';
         return;
     }
     
@@ -1642,11 +1642,11 @@ function openOrderTracking() {
 }
 
 function openOrderHistory() {
-    window.location.href = 'order-history.html';
+    window.location.href = 'order-history.php';
 }
 
 function openProfile() {
-    window.location.href = 'profile.html';
+    window.location.href = 'profile.php';
 }
 
 function requestDocument(type) {
@@ -1960,7 +1960,7 @@ function initAdminLoginPage() {
     // Check if already logged in as admin
     const adminLoggedIn = localStorage.getItem('isAdminLoggedIn') === 'true';
     if (adminLoggedIn) {
-        window.location.href = 'admin-dashboard.html';
+        window.location.href = 'admin-dashboard.php';
         return;
     }
     
@@ -2006,10 +2006,10 @@ function handleAdminLogin(e) {
         setTimeout(() => {
             console.log('Redirecting to admin dashboard...');
             try {
-                window.location.href = 'admin-dashboard.html';
+                window.location.href = 'admin-dashboard.php';
             } catch (error) {
                 console.error('Redirect failed:', error);
-                alert('Redirect failed. Please manually navigate to admin-dashboard.html');
+                alert('Redirect failed. Please manually navigate to admin-dashboard.php');
             }
         }, 1500);
     } else {
@@ -2039,7 +2039,7 @@ function testAdminLogin() {
     showMessage('success', 'Success!', 'Test login successful! Redirecting to admin dashboard...');
     
     setTimeout(() => {
-        window.location.href = 'admin-dashboard.html';
+        window.location.href = 'admin-dashboard.php';
     }, 1500);
 }
 
@@ -2050,7 +2050,7 @@ function initAdminDashboardPage() {
     const admin = JSON.parse(localStorage.getItem('adminUser') || '{}');
     
     if (!adminLoggedIn || !admin.id) {
-        window.location.href = 'admin-login.html';
+        window.location.href = 'admin-login.php';
         return;
     }
     
@@ -2958,7 +2958,7 @@ function handleAdminLogout() {
     
     showMessage('success', 'Success!', 'Logged out successfully!');
     setTimeout(() => {
-        window.location.href = 'admin-login.html';
+        window.location.href = 'admin-login.php';
     }, 1500);
 }
 
