@@ -192,6 +192,29 @@ The JavaScript functionality from the original site is preserved:
 
 ## Troubleshooting
 
+### "Internal Server Error" (500 Error)
+
+If you get an "Internal Server Error" when accessing the site:
+
+1. **Disable .htaccess temporarily**: Rename or delete the `.htaccess` file to see if it's causing the issue:
+   ```bash
+   # Windows Command Prompt (in the php directory)
+   ren .htaccess .htaccess.bak
+   
+   # Linux/Mac
+   mv .htaccess .htaccess.bak
+   ```
+
+2. **Check Apache error logs** for specific error details:
+   - XAMPP Windows: `C:\xampp\apache\logs\error.log`
+   - WAMP Windows: `C:\wamp64\logs\apache_error.log`
+   - Linux: `/var/log/apache2/error.log`
+
+3. **Verify AllowOverride is enabled** in Apache configuration:
+   - Open your Apache `httpd.conf` file
+   - Find the `<Directory>` section for your document root
+   - Ensure `AllowOverride All` is set (not `AllowOverride None`)
+
 ### "Not Found" or 404 Errors
 
 If you get "Not Found" errors when clicking links:
@@ -206,14 +229,7 @@ If you get "Not Found" errors when clicking links:
    ls -la /path/to/your/webroot/
    ```
 
-3. **Apache configuration**: Ensure mod_rewrite is enabled (if using .htaccess):
-   ```bash
-   # Linux
-   sudo a2enmod rewrite
-   sudo systemctl restart apache2
-   ```
-
-4. **Windows XAMPP/WAMP**: Make sure you copied the files to the correct htdocs directory:
+3. **Windows XAMPP/WAMP**: Make sure you copied the files to the correct htdocs directory:
    - XAMPP: `C:\xampp\htdocs\`
    - WAMP: `C:\wamp64\www\`
 
