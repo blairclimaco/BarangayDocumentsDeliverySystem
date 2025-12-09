@@ -723,8 +723,10 @@ function closeMessage() {
     }
 }
 
-function updatePasswordStrength() {
-    const passwordInput = document.getElementById('password');
+function updatePasswordStrength(inputId) {
+    // Default to 'password' if no inputId is provided (for backwards compatibility)
+    const passwordInputId = inputId || 'password';
+    const passwordInput = document.getElementById(passwordInputId);
     const strengthFill = document.getElementById('strengthFill');
     const strengthText = document.getElementById('strengthText');
     
@@ -1455,7 +1457,9 @@ function setupProfileEventListeners() {
     // Password strength indicator
     const newPassword = document.getElementById('newPassword');
     if (newPassword) {
-        newPassword.addEventListener('input', updatePasswordStrength);
+        newPassword.addEventListener('input', function() {
+            updatePasswordStrength('newPassword');
+        });
     }
 }
 
