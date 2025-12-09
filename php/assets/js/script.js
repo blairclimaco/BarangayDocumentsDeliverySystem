@@ -2934,7 +2934,8 @@ function removePersonnel(personnelId) {
         localStorage.setItem('personnel', JSON.stringify(personnel));
         
         // Update all orders that had this personnel assigned
-        const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+        // First, reload orders from localStorage to get the latest state
+        orders = JSON.parse(localStorage.getItem('orders') || '[]');
         let ordersUpdated = false;
         
         orders.forEach(order => {
@@ -2954,11 +2955,16 @@ function removePersonnel(personnelId) {
         loadPersonnelList();
         
         // Reload orders table if it exists (we're on admin dashboard)
-        if (typeof loadOrders === 'function') {
-            loadOrders();
+        if (typeof loadOrdersTable === 'function') {
+            loadOrdersTable();
         }
         
-        showMessage('success', 'Success!', 'Personnel removed successfully! Orders reassigned to TBD.');
+        // Also update stats
+        if (typeof updateAdminStats === 'function') {
+            updateAdminStats();
+        }
+        
+        showMessage('success', 'Success!', 'Personnel removed successfully! All orders reassigned to TBD.');
     }
 }
 

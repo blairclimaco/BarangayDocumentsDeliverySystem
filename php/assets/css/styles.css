@@ -2294,12 +2294,12 @@ input:checked + .toggle-slider:before {
 
 .user-name {
     font-weight: 600;
-    color: #333;
+    color: #f5f6f7;
     font-size: 0.9rem;
 }
 
 .user-role {
-    color: #666;
+    color: #e8ebed;
     font-size: 0.8rem;
 }
 
