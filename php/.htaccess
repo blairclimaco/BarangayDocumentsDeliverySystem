@@ -1,0 +1,11 @@
+# Barangay Documents Delivery System - Apache Configuration
+# Simple .htaccess for compatibility with most Apache installations
+
+# Set directory index files
+DirectoryIndex index.php index.html
+
+# Security: Prevent directory listing
+Options -Indexes
+
+# Set default charset
+AddDefaultCharset UTF-8

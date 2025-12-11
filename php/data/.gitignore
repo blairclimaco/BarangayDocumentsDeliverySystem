@@ -1,0 +1,9 @@
+# Ignore all JSON data files to avoid committing large data
+*.json
+
+# Keep this .gitignore file
+!.gitignore
+
+# Ignore any backup files
+*.bak
+*.tmp
