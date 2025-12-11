@@ -1639,13 +1639,13 @@ input:checked + .toggle-slider:before {
     font-weight: 600;
     font-size: 0.8rem;
     line-height: 1.1;
-    color: #333;
+    color: #333 !important;
 }
 
 .sidebar .user-role {
     display: block;
     font-size: 0.7rem;
-    color: #666;
+    color: #666 !important;
     line-height: 1.1;
 }
 

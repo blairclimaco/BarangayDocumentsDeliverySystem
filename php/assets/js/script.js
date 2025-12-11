@@ -282,6 +282,14 @@ function handleLogin(e) {
 function initRegisterPage() {
     // Initialize password strength indicator
     updatePasswordStrength();
+    
+    // Set up password strength update on input
+    const passwordInput = document.getElementById('password');
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            updatePasswordStrength('password');
+        });
+    }
 }
 
 function handleRegister(e) {
